@@ -1,0 +1,33 @@
+header{
+    background-color: blue;
+    height: 80px;
+}
+.header-container{
+    width: 70%;
+    margin: 0 auto;
+    padding: 10px 50px 10px 50px;
+}
+.app-container{
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+#task-name{
+    width: 600px;
+    margin: 20px 30px;
+    height: 45px;
+}
+#add{
+    background-color: blue;
+    color: white;
+    height: 35px;
+    font-size: 15px;
+    font-weight: 600;
+    border: 2px solid #fff;
+    border-radius: 5px;
+}
+#add:hover{
+    background-color: #7af0f0;
+    color: black;
+}
