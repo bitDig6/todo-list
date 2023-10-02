@@ -1,18 +1,21 @@
 <?php
- $db_name = "todolist";
- $servername = "localhost";
- $username = "root";
- $password = "";
+include "conn.php";
+//header("location:index.php");
+//this block of code only stops the warning to show up.isset
 
- $task =  $_GET['task-name'];
+$task = $_POST['tasking'];
+//header('location:index.php');
+if(empty($task)){
+    echo "Field empty! Please Enter a task.";
+}else{
+    $conn->query("INSERT INTO taskslist VALUES(NULL,'$task','Not Done')");
+    echo "Task added successfully!";
+}
 
- try {
-   $conn = new PDO("mysql:host=$servername;dbname=$db_name", $username, $password);
-   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-   $sql_query = "INSERT INTO taskslist(task_no,task_name,task_status) VALUES(NULL,'$task','undone')";
-   $conn->exec($sql_query);
-   echo "Task Added!";
- } catch(PDOException $e) {
-   echo "Connection Error: " . $e->getMessage();
- }
-?> 
+/*
+More: 1. Handle empty field
+2. Connection error
+3. Stay on home page and show the added task below, show the successful message
+in the homepage.
+4. You have a fatal problem in Database.
+*/

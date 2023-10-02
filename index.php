@@ -16,8 +16,8 @@
 
     <div class="app-body">
       <div class="app-container">
-        <form action="insert.php" method="GET">
-          <input type="text" id="task-name" class="work" placeholder="Enter a task you want to perform">
+        <form action="insert.php" method="POST">
+          <input type="text" id="task-name" name="tasking" placeholder="Enter a task you want to perform">
           <button id="add">ADD</button>
         </form>
       </div>
