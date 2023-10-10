@@ -1,4 +1,5 @@
 <?php
+session_start();
  $db_name = "todolist";
  $servername = "localhost";
  $username = "root";

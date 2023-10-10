@@ -1,3 +1,6 @@
+<?php
+include('conn.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -20,6 +23,45 @@
           <input type="text" id="task-name" name="tasking" placeholder="Enter a task you want to perform">
           <button id="add">ADD</button>
         </form>
+      </div>
+    </div>
+
+    <div class="app-data">
+      <div class="app-container">
+        <table>
+          <thead>
+          <tr>
+            <th>Task ID</th>
+            <th>Task Name</th>
+            <th>Status</t>
+          </tr>
+          </thead>
+          <tbody>
+            <?php
+              $stmt = $conn->query('SELECT * FROM taskslist');
+              $stmt->execute();
+              $result = $stmt->fetchAll();
+              
+              if($result){
+                foreach($result as $data){
+                  ?>
+                  <tr>
+                    <td><?=$data['task_no'] ?></td>
+                    <td><?=$data['task_name'] ?></td>
+                    <td><?=$data['task_status'] ?></td>
+                  </tr>
+                  <?php
+                }
+              }else{
+                ?>
+                <tr>
+                  <td colspan=3>No Records Found</td>
+                </tr>
+                <?php
+              }
+              ?>
+          </tbody>
+        </table>
       </div>
     </div>
 
