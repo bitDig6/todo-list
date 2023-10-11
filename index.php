@@ -29,14 +29,6 @@ include('conn.php');
     <div class="app-data">
       <div class="app-container">
         <table>
-          <thead>
-          <tr>
-            <th>Task ID</th>
-            <th>Task Name</th>
-            <th>Status</t>
-          </tr>
-          </thead>
-          <tbody>
             <?php
               $stmt = $conn->query('SELECT * FROM taskslist');
               $stmt->execute();
@@ -46,9 +38,25 @@ include('conn.php');
                 foreach($result as $data){
                   ?>
                   <tr>
-                    <td><?=$data['task_no'] ?></td>
-                    <td><?=$data['task_name'] ?></td>
-                    <td><?=$data['task_status'] ?></td>
+                    <td>
+                      <form action="update.php" method="POST">
+                        <input type="checkbox" name="check" value="<?=$data['task_no']; ?>">
+                        <!--I am working on update/edit-->
+                      </form>
+                    </td>
+                    <td>
+                      <?=$data['task_no']; ?>.
+                      <?=$data['task_name']; ?>
+                      <br>Status:
+                      <?=$data['task_status'];?>
+                    </td>
+                    <td >
+                     <form action="delete.php" method="POST">
+                      <button style="background-color:red" type="submit" name="del" value="<?=$data['task_no']; ?>">
+                      Delete
+                    </button>
+                     </form>
+                    </td>
                   </tr>
                   <?php
                 }
@@ -60,7 +68,6 @@ include('conn.php');
                 <?php
               }
               ?>
-          </tbody>
         </table>
       </div>
     </div>
