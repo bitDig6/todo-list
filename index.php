@@ -19,7 +19,7 @@ include('conn.php');
 
     <div class="app-body">
       <div class="app-container">
-        <form action="insert.php" method="POST">
+        <form action="insert.php" method="POST" autocomplete="off">
           <input type="text" id="task-name" name="tasking" placeholder="Enter a task you want to perform">
           <button id="add">ADD</button>
         </form>
@@ -33,30 +33,39 @@ include('conn.php');
               $stmt = $conn->query('SELECT * FROM taskslist');
               $stmt->execute();
               $result = $stmt->fetchAll();
+              $count = 1;
               
               if($result){
                 foreach($result as $data){
                   ?>
                   <tr>
-                    <td>
-                      <form action="update.php" method="POST">
-                        <input type="checkbox" name="check" value="<?=$data['task_no']; ?>">
-                        <!--I am working on update/edit-->
-                      </form>
-                    </td>
-                    <td>
-                      <?=$data['task_no']; ?>.
+                  <td>
+                      <?= $count++; ?>
                       <?=$data['task_name']; ?>
-                      <br>Status:
-                      <?=$data['task_status'];?>
                     </td>
+                   
+                    <?php
+                      if($data['task_status']!='Done'){
+                        ?>
+                        <form action="update.php" method="POST">
+                        <td>
+                    <button style="background-color:blue" type="submit" name="up" value="<?=$data['task_no'];?>">Mark As Done</button>
+                    </td>
+                    </form>
+                    <?php 
+                      }else{
+                        ?>
+                        <td><?=$data['task_status']; ?></td>
+                      <?php
+                      }
+                      ?>
+
                     <td >
                      <form action="delete.php" method="POST">
-                      <button style="background-color:red" type="submit" name="del" value="<?=$data['task_no']; ?>">
-                      Delete
-                    </button>
+                      <button style="background-color:red" type="submit" name="del" value="<?=$data['task_no']; ?>">Delete</button>
                      </form>
                     </td>
+
                   </tr>
                   <?php
                 }
